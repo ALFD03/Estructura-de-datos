@@ -56,7 +56,7 @@ void addJuego (Juego *& BibliotecaDeJuegos, string NombreJuego, string FechaLanz
 	Juego *aux1 = BibliotecaDeJuegos;
 	Juego *aux2;
 
-	nuevoJuego ->siguiente = aux1;
+	nuevoJuego -> siguiente = aux1;
 
 	cout << "El juego se agrego correctamente a la biblioteca de juegos" << endl;
 
