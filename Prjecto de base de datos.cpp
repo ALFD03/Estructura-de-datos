@@ -21,6 +21,7 @@ void insertar(Juegos *&,char[]);
 
 int main(){ 
     Juegos *lista=NULL;
+    char jogo [50];
 
     int opc=0;
     
@@ -40,17 +41,18 @@ int main(){
     {
     case 1:
     {
-        cout<<"Ingresar un nuevo juegos\n ";
-        cout<<"\n1._ Titulo del Juego: ";
-        cin.getline(Juegos.titulo,50,'\n');
-        cout<<"\n2._ Genero del Juego: ";
-        cin.getline(Juegos.genero,50,'\n');
-        cout<<"\n3._ Fecha de lanzamiento del Juego: ";
-        cin.getline(Juegos.fecha_lanzamiento,50,'\n');
-        cout<<"\n4._ Valoracion del Juego: ";
-        cin.getline(Juegos.valoracion,50,'\n');
+    	cin.getline(jogo,50,'\n');
+//        cout<<"Ingresar un nuevo juegos\n ";
+//        cout<<"\n1._ Titulo del Juego: ";
+//        cin.getline(Juegos.titulo,50,'\n');
+//        cout<<"\n2._ Genero del Juego: ";
+//        cin.getline(Juegos.genero,50,'\n');
+//        cout<<"\n3._ Fecha de lanzamiento del Juego: ";
+//        cin.getline(Juegos.fecha_lanzamiento,50,'\n');
+//        cout<<"\n4._ Valoracion del Juego: ";
+//        cin.getline(Juegos.valoracion,50,'\n');
 
-        insertar(lista,Juegos);
+        insertar(lista,jogo);
     }
         break;
     
@@ -65,13 +67,12 @@ int main(){
 
 void insertar(Juegos *&,char t[]){
     Juegos *nuevo_juego = new Juegos();
-    nuevo_juego->Juegos = t;
 
 	Juegos *lista=NULL;
     Juegos *aux1=lista;
     Juegos *aux2;
 
-    while((aux1!=NULL)&&(aux1->Juegos<t)){
+    while((aux1!=NULL)&&(aux1->titulo<t)){
         aux2=aux1;
         aux1=aux1->siguiente;
     }
