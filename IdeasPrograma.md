@@ -1,4 +1,4 @@
-# Biblioteca de Juegos
+# <center> Biblioteca de Juegos </center>
 ----
 
 ## Campos
@@ -36,14 +36,14 @@ using namespace std;
 
 ```c++
 
-struct Juego {
-    string NombreJuego ;
-    string FechaLanzamiento ;
-    int Valoracion;
-    string Plataformas ;
-    string Genero ;
-    string Desarrollador ;
-Juego *siguiente;
+struct Game {
+	string GameName ; 		//Nombre del juego
+	string ReleaseDate ; 	//Fecha de lanzamiento
+	int Rating; 			//Calificacion
+	string Platforms ;	    //Plataformas
+	string Genre ;			//Genero
+	string Developer ;		//Desarrollador
+	Game *next;				//Puntero al next nodo
 };
 
 ```
@@ -52,7 +52,11 @@ Juego *siguiente;
 
 ```c++
 
-void addJuego (Juego *&, string, string, int, string, string, string);
+void addGame (Game *&, string, string, int, string, string, string);
+void ShowAllGames (Game *);
+void ShowGame (Game *);
+void SearchGame (Game *, string);
+void DeleteGame (Game *&, string);
 
 ```
 
@@ -62,11 +66,9 @@ void addJuego (Juego *&, string, string, int, string, string, string);
 
 int main(){
 
-Juego *BibliotecaDeJuegos = NULL;
-int Valoracion;
-string NombreJuego , FechaLanzamiento , Plataformas , Genero , Desarrollador ;
-
-int option; //Declaracion de variables
+	Game *GameLibrary = NULL; 										//Declaracion de la lista
+	int Rating, option; 											//Declaracion de variables
+	string GameName, ReleaseDate, Platforms, Genre, Developer; 		//Declaracion de variables
 
  	//-------------------------Menu-------------------------
 	cout << "-----Welcome to the game library-----" << endl;
@@ -114,21 +116,83 @@ return 0;
 
 ```c++
 
-    cout << "Introduzca el nombre del juego: ";
-	getline(cin, NombreJuego);
-	cout << "Introduzca la fecha de lanzamiento: ";
-	getline(cin, FechaLanzamiento);
-	cout << "Introduzca la valoracion: ";
-	cin >> Valoracion;
+	system("cls");
 	cin.ignore();
-	cout << "Introduzca las plataformas: ";
-	getline(cin, Plataformas);
-	cout << "Introduzca el genero: ";
-	getline(cin, Genero);
-	cout << "Introduzca el desarrollador: ";
-	getline(cin, Desarrollador);
+	cout << "\n\t\t-----The Game Library-----\n" 	<< endl;
+	cout << "\t\tIntroduzca el nombre del juego: ";		getline(cin, GameName);
+	cout << "\t\tIntroduzca la fecha de lanzamiento (DD/MM/AAAA): "; getline(cin, ReleaseDate);
+	cout << "\t\tIntroduzca la valoracion 0/10: ";		cin >> Rating;
+	cin.ignore();
+	cout << "\t\tIntroduzca las plataformas: "; 		getline(cin, Platforms);
+	cout << "\t\tIntroduzca el genero: "; 				getline(cin, Genre);
+	cout << "\t\tIntroduzca el desarrollador: "; 		getline(cin, Developer);
+	addGame(GameLibrary, GameName, ReleaseDate, Rating, Platforms, Genre, Developer); //Añadir juego a la lista
+	break;
 
-	addJuego(BibliotecaDeJuegos, NombreJuego, FechaLanzamiento, Valoracion, Plataformas, Genero, Desarrollador);
+```
+
+### Case 2
+
+```c++
+
+	system("cls");
+	cin.ignore();
+	cout << "\n\t\t-----The Game Library-----\n" 	<< endl;
+	cout << "\t\tIntroduzca el nombre del juego: ";		getline(cin, GameName);
+	SearchGame(GameLibrary, GameName);
+	cout << "\n\t\t" << system("pause");
+	break;
+
+```
+
+### Case 4
+
+```c++
+
+	system("cls");
+	cin.ignore();
+	cout << "\n\t\t-----The Game Library-----\n" 	<< endl;
+	cout << "\t\tIntroduzca el nombre del juego: ";		getline(cin, GameName);
+	DeleteGame(GameLibrary, GameName);
+	cout << "\n\t\t" << system("pause");
+	break;
+
+```
+
+### Case 5
+
+```c++
+
+	system("cls");
+	cout << "\n\t\t-----Games-----\n";
+	ShowAllGames(GameLibrary);
+	cout << "\n\t\t" << system("pause");
+	break;
+
+```
+
+### Case 6
+
+```c++
+
+	system("cls");
+	cout << "\n\t\t-----The Game Library-----\n" 	<< endl;
+	cout << "\t\tMAY THE FORCE BE WITH YOU!" << endl;
+	menu = false;
+	cout << "\n\t\t" << system("pause");
+	break;
+
+```
+
+### Default
+
+```c++
+
+	system("cls");
+	cout << "\n\t\t-----The Game Library-----\n" 	<< endl;
+	cout << "\t\tIntroduzca una opcion valida..." << endl;
+	cout << "\n\t\t" << system("pause");
+	break;
 
 ```
 
@@ -138,24 +202,191 @@ return 0;
 
 ```c++
 
-void addJuego (Juego *& BibliotecaDeJuegos, string NombreJuego, string FechaLanzamiento, int Valoracion, string Plataformas, string Genero, string Desarrollador) {
-	Juego *nuevoJuego = new Juego();
-	nuevoJuego -> NombreJuego = NombreJuego;
-	nuevoJuego -> FechaLanzamiento = FechaLanzamiento;
-	nuevoJuego -> Valoracion = Valoracion;
-	nuevoJuego -> Plataformas = Plataformas;
-	nuevoJuego -> Genero = Genero;
-	nuevoJuego -> Desarrollador = Desarrollador;
+void addGame (Game *& GameLibrary, string GameName, string ReleaseDate, int Rating, string Platforms, string Genre, string Developer) {
+	Game *NewGame = new Game();
+	NewGame -> GameName = GameName;
+	NewGame -> ReleaseDate = ReleaseDate;
+	NewGame -> Rating = Rating;
+	NewGame -> Platforms = Platforms;
+	NewGame -> Genre = Genre;
+	NewGame -> Developer = Developer;
 
-	Juego *aux1 = BibliotecaDeJuegos;
-	Juego *aux2;
+	Game *pointer = GameLibrary;
 
-	nuevoJuego -> siguiente = aux1;
+	GameLibrary = NewGame;
+	NewGame -> next = pointer;
 
-	cout << "El juego se agrego correctamente a la biblioteca de juegos" << endl;
-
-
+	cout << "\nEl juego se agrego correctamente a la biblioteca de juegos" << endl;
 }
 
 ```
 
+### ShowAllGames
+
+```c++
+
+void ShowAllGames (Game *GameLibrary){
+	int i = 1;
+	Game *Position = new Game();
+	Position = GameLibrary;
+
+	while (Position != NULL) {
+		cout<< i << "._ " << Position -> GameName<<endl;
+		Position = Position -> next;
+		i++;
+	}
+}
+
+```
+
+### ShowGame
+
+```c++
+
+void SearchGame (Game *GameLibrary, string GameName) {
+ 	Game *Position = new Game();
+ 	Position = GameLibrary;
+	bool found = false;
+
+	while (Position != NULL) {
+		if (Position -> GameName == GameName){
+			found = true;
+			ShowGame(Position);
+		} 
+		Position = Position -> next;
+	}
+	if (found == false ){
+		cout<< "El Juego "<<GameName<<" no se encontro en la biblioteca. \n";
+	}
+}
+
+void ShowGame (Game *Position){
+	cout << "Nombre del juego: " << Position -> GameName << endl;
+	cout << "Fecha de lanzamiento: " << Position -> ReleaseDate << endl;
+	cout << "Valoracion: " << Position -> Rating << endl;
+	cout << "Plataformas: " << Position -> Platforms << endl;
+	cout << "Genero: " << Position -> Genre << endl;
+	cout << "Desarrollador: " << Position -> Developer << endl;
+}
+
+```
+
+### DeleteGame
+
+```c++
+
+void DeleteGame (Game *& GameLibrary, string GameName) {
+	Game *Position = new Game();
+	Game *Previous = new Game();
+	Position = GameLibrary;
+
+	while (Position != NULL && Position -> GameName != GameName) {
+		Previous = Position;
+		Position = Position -> next;
+	}
+
+	if (Position == NULL) {
+		cout << "El juego no se encontro en la biblioteca" << endl;
+	} else if (Position == GameLibrary) {
+		GameLibrary = GameLibrary -> next;
+		delete Position;
+		cout << "El juego se elimino correctamente" << endl;
+	} else {
+		Previous -> next = Position -> next;
+		delete Position;
+		cout << "El juego se elimino correctamente" << endl;
+	}
+}
+
+```
+----
+
+## <center> MAIN FUNCTION </center>
+
+```c++
+
+int main() {
+	Game *GameLibrary = NULL; 										//Declaracion de la lista
+	int Rating, option, menu = true; 											//Declaracion de variables
+	string GameName, ReleaseDate, Platforms, Genre, Developer; 		//Declaracion de variables
+
+	do {
+		system("cls");
+		//-------------------------Menu-------------------------
+		cout << "\n\t\t-----The Game Library-----\n" 	<< endl;
+		cout << "\t\t1. Agregar un Juego." 		<< endl;
+		cout << "\t\t2. Buscar un Juego" 			<< endl;
+		cout << "\t\t3. Modificar un Juego" 		<< endl;
+		cout << "\t\t4. Eliminar un Juego" 		<< endl;
+		cout << "\t\t5. Ver Juegos" 				<< endl;
+		cout << "\t\t6. Salir" 					<< endl;
+		cout << "\n\n\t\tSeleccione una opcion: "; cin >> option;
+
+		switch (option) {
+			case 1: 	//* --> ADD A GAME
+				system("cls");
+				cin.ignore();
+				cout << "\n\t\t-----The Game Library-----\n" 	<< endl;
+				cout << "\t\tIntroduzca el nombre del juego: ";		getline(cin, GameName);
+				cout << "\t\tIntroduzca la fecha de lanzamiento (DD/MM/AAAA): "; getline(cin, ReleaseDate);
+				cout << "\t\tIntroduzca la valoracion 0/10: ";		cin >> Rating;
+				cin.ignore();
+				cout << "\t\tIntroduzca las plataformas: "; 		getline(cin, Platforms);
+				cout << "\t\tIntroduzca el genero: "; 				getline(cin, Genre);
+				cout << "\t\tIntroduzca el desarrollador: "; 		getline(cin, Developer);
+				addGame(GameLibrary, GameName, ReleaseDate, Rating, Platforms, Genre, Developer); //Añadir juego a la lista
+				break;
+
+			case 2: 	//* --> SEARCH A GAME
+				system("cls");
+				cin.ignore();
+				cout << "\n\t\t-----The Game Library-----\n" 	<< endl;
+				cout << "\t\tIntroduzca el nombre del juego: ";		getline(cin, GameName);
+				SearchGame(GameLibrary, GameName);
+				cout << "\n\t\t" << system("pause");
+				break;
+
+			case 3:		//todo --> MODIFY A GAME
+				system("cls");
+				cout << "\n\t\t-----The Game Library-----\n" 	<< endl;
+				cout << "You chose option 3" << endl;
+				cout << "\n\t\t" << system("pause");
+				break;
+
+			case 4:		//* --> DELETE A GAME
+				system("cls");
+				cin.ignore();
+				cout << "\n\t\t-----The Game Library-----\n" 	<< endl;
+				cout << "\t\tIntroduzca el nombre del juego: ";		getline(cin, GameName);
+				DeleteGame(GameLibrary, GameName);
+				cout << "\n\t\t" << system("pause");
+				break;
+
+			case 5:		//* --> SHOW ALL GAMES
+				system("cls");
+				cout << "\n\t\t-----Games-----\n";
+				ShowAllGames(GameLibrary);
+				cout << "\n\t\t" << system("pause");
+				break;
+
+			case 6:		//* --> EXIT
+				system("cls");
+				cout << "\n\t\t-----The Game Library-----\n" 	<< endl;
+				cout << "\t\tMAY THE FORCE BE WITH YOU!" << endl;
+				menu = false;
+				cout << "\n\t\t" << system("pause");
+				break;
+
+			default:	//* --> DEFAULT
+				system("cls");
+				cout << "\n\t\t-----The Game Library-----\n" 	<< endl;
+				cout << "\t\tIntroduzca una opcion valida..." << endl;
+				cout << "\n\t\t" << system("pause");
+				break;
+		}
+	} while (menu == true);
+
+	return 0;
+}
+
+```
