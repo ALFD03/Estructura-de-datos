@@ -5,58 +5,58 @@
 #include <string>
 using namespace std;
 
-struct Juego {
+struct Game {
 
-string NombreJuego ;
-string FechaLanzamiento ;
-int Valoracion;
-string Plataformas ;
-string Genero ;
-string Desarrollador ;
+string GameName ;
+string ReleaseDate ;
+int Rating;
+string Platforms ;
+string Genre ;
+string Developer ;
 
-Juego *siguiente;
+Game *siguiente;
 };
 
-void addJuego (Juego *&, string, string, int, string, string, string);
+void addGame (Game *&, string, string, int, string, string, string);
 
 
 int main() {
-	Juego *BibliotecaDeJuegos = NULL;
-	int Valoracion;
-	string NombreJuego , FechaLanzamiento , Plataformas , Genero , Desarrollador ;
+	Game *GameLibrary = NULL;
+	int Rating;
+	string GameName , ReleaseDate , Platforms , Genre , Developer ;
 
 	cout << "Introduzca el nombre del juego: ";
-	getline(cin, NombreJuego);
+	getline(cin, GameName);
 	cout << "Introduzca la fecha de lanzamiento: ";
-	getline(cin, FechaLanzamiento);
+	getline(cin, ReleaseDate);
 	cout << "Introduzca la valoracion: ";
-	cin >> Valoracion;
+	cin >> Rating;
 	cin.ignore();
 	cout << "Introduzca las plataformas: ";
-	getline(cin, Plataformas);
+	getline(cin, Platforms);
 	cout << "Introduzca el genero: ";
-	getline(cin, Genero);
+	getline(cin, Genre);
 	cout << "Introduzca el desarrollador: ";
-	getline(cin, Desarrollador);
+	getline(cin, Developer);
 
-	addJuego(BibliotecaDeJuegos, NombreJuego, FechaLanzamiento, Valoracion, Plataformas, Genero, Desarrollador);
+	addGame(GameLibrary, GameName, ReleaseDate, Rating, Platforms, Genre, Developer);
 	
 	return 0;
 }
 
-void addJuego (Juego *& BibliotecaDeJuegos, string NombreJuego, string FechaLanzamiento, int Valoracion, string Plataformas, string Genero, string Desarrollador) {
-	Juego *nuevoJuego = new Juego();
-	nuevoJuego -> NombreJuego = NombreJuego;
-	nuevoJuego -> FechaLanzamiento = FechaLanzamiento;
-	nuevoJuego -> Valoracion = Valoracion;
-	nuevoJuego -> Plataformas = Plataformas;
-	nuevoJuego -> Genero = Genero;
-	nuevoJuego -> Desarrollador = Desarrollador;
+void addGame (Game *& GameLibrary, string GameName, string ReleaseDate, int Rating, string Platforms, string Genre, string Developer) {
+	Game *nuevoGame = new Game();
+	nuevoGame -> GameName = GameName;
+	nuevoGame -> ReleaseDate = ReleaseDate;
+	nuevoGame -> Rating = Rating;
+	nuevoGame -> Platforms = Platforms;
+	nuevoGame -> Genre = Genre;
+	nuevoGame -> Developer = Developer;
 
-	Juego *aux1 = BibliotecaDeJuegos;
-	Juego *aux2;
+	Game *aux1 = GameLibrary;
+	Game *aux2;
 
-	nuevoJuego -> siguiente = aux1;
+	nuevoGame -> siguiente = aux1;
 
 	cout << "El juego se agrego correctamente a la biblioteca de juegos" << endl;
 
