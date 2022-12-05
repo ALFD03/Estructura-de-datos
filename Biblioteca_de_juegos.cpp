@@ -1,4 +1,3 @@
-
 //										//^-----	GAME LIBRARY	-----^\\										\\
 
 // ! 		::::::::: LIBRARIES ::::::::::
@@ -12,7 +11,7 @@ using namespace std;
 struct Game {
 	string GameName ; 		//Nombre del juego
 	string ReleaseDate ; 	//Fecha de lanzamiento
-	int Rating; 			//Calificacion
+	float Rating; 			//Calificacion
 	string Platforms ;	    //Plataformas
 	string Genre ;			//Genero
 	string Developer ;		//Desarrollador
@@ -21,7 +20,7 @@ struct Game {
 
 // ! 		::::::::: PROTOTYPES ::::::::::
 
-void addGame (Game *&, string, string, int, string, string, string); //Añadir juego
+void addGame (Game *&, string, string, float, string, string, string); //Añadir juego
 void ShowAllGames (Game *);											 //Mostrar todos los juegos
 void ShowGame (Game *);							 					 //Mostrar un juego
 void SearchGame (Game *, string);									 //Buscar un juego
@@ -35,7 +34,8 @@ void DeleteGame (Game *&, string);									 //Eliminar un juego
 
 int main() {
 	Game *GameLibrary = NULL; 										//Declaracion de la lista
-	int Rating, option, menu = true; 											//Declaracion de variables
+	float Rating, menu = true; 								        //Declaracion de variables
+    int option;                                                     //Declaracion de variables
 	string GameName, ReleaseDate, Platforms, Genre, Developer; 		//Declaracion de variables
 
 	do {
@@ -125,7 +125,7 @@ int main() {
 
 //* 1	----> ADD GAME <----	 *//
 
-void addGame (Game *& GameLibrary, string GameName, string ReleaseDate, int Rating, string Platforms, string Genre, string Developer) {
+void addGame (Game *& GameLibrary, string GameName, string ReleaseDate, float Rating, string Platforms, string Genre, string Developer) {
 	Game *NewGame = new Game();
 	NewGame -> GameName = GameName;
 	NewGame -> ReleaseDate = ReleaseDate;
@@ -198,7 +198,7 @@ void DeleteGame (Game *& GameLibrary, string GameName) {
 //* 5	----> SHOW ALL GAMES <----	 *//
 
 void ShowAllGames (Game *GameLibrary){
-	int i = 1;
+	float i = 1;
 	Game *Position = new Game();
 	Position = GameLibrary;
 
