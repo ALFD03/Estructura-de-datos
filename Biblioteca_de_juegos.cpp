@@ -19,6 +19,8 @@ Game *siguiente;
 
 void addGame (Game *&, string, string, int, string, string, string);
 void ShowAllGames (Game *);
+void ShowGame (Game *);
+void SearchGame (Game *, string);
 
 
 int main() {
@@ -41,8 +43,11 @@ int main() {
 	getline(cin, Developer);
 
 	addGame(GameLibrary, GameName, ReleaseDate, Rating, Platforms, Genre, Developer);
-	ShowAllGames
-(GameLibrary);
+	ShowAllGames(GameLibrary);
+
+	cout << "Introduzca el nombre del juego a buscar: ";
+	getline(cin, GameName);
+	SearchGame(GameLibrary, GameName);
 
 	return 0;
 }
@@ -77,5 +82,34 @@ void ShowAllGames (Game *GameLibrary){
 
 }
 
+//void para buscar y mostrar los elementos de la lista
+
+void SearchGame (Game *GameLibrary, string GameName) {
+ 	Game *Position = new Game();
+ 	Position = GameLibrary;
+	bool found = false;
+
+	while (Position != NULL) {
+		if (Position -> GameName == GameName){
+			found = true;
+			ShowGame(Position);
+		} 
+		Position = Position -> siguiente;
+	}
+
+	if (found == false ){
+		cout<< "El Juego "<<GameName<<" no se encontro en la biblioteca. \n";
+	}
+
+}
+
+void ShowGame (Game *Position){
+	cout << "Nombre del juego: " << Position -> GameName << endl;
+	cout << "Fecha de lanzamiento: " << Position -> ReleaseDate << endl;
+	cout << "Valoracion: " << Position -> Rating << endl;
+	cout << "Plataformas: " << Position -> Platforms << endl;
+	cout << "Genero: " << Position -> Genre << endl;
+	cout << "Desarrollador: " << Position -> Developer << endl;
+}
 
 
