@@ -16,7 +16,7 @@
 * SearchGame.
 * ModifyGame.
 * DeleteGame.
-* ShowGame.
+* ShowAllGames.
 
 -----
 
@@ -74,7 +74,7 @@ int option; //Declaracion de variables
 	cout << "2. Search a game" << endl;
 	cout << "3. Edit a game" << endl;
 	cout << "4. Delete a game" << endl;
-	cout << "5. Show game" << endl;
+	cout << "5. Show all games" << endl;
 	cout << "6. Exit" << endl;
 	
 	cout << "\n\nChoose an option: "; cin >> option;
