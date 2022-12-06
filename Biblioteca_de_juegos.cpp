@@ -34,7 +34,8 @@ void DeleteGame (Game *&, string);									 //Eliminar un juego
 
 int main() {
 	Game *GameLibrary = NULL; 										//Declaracion de la lista
-	float Rating, menu = true; 								        //Declaracion de variables
+	float Rating; 								        			//Declaracion de variables
+	bool menu = true;												//Declaracion de variables
     int option;                                                     //Declaracion de variables
 	string GameName, ReleaseDate, Platforms, Genre, Developer; 		//Declaracion de variables
 
