@@ -36,10 +36,10 @@ int main() {
 	Game *GameLibrary = NULL; 										//Declaracion de la lista
 	float Rating; 								        			//Declaracion de variables
 	bool menu = true;												//Declaracion de variables
-    int option;                                                     //Declaracion de variables
 	string GameName, ReleaseDate, Platforms, Genre, Developer; 		//Declaracion de variables
 
 	do {
+		int option;                                                 //Declaracion de variables
 		system("cls");
 		//-------------------------Menu-------------------------
 		cout << "\n\t\t-----The Game Library-----\n" 	<< endl;
@@ -77,8 +77,28 @@ int main() {
 
 			case 3:		//todo --> MODIFY A GAME
 				system("cls");
-				cout << "\n\t\t-----The Game Library-----\n" 	<< endl;
-				cout << "You chose option 3" << endl;
+				cout << "\n\t\t-----The Game Library-----\n\n" 	<< endl;
+				cin.ignore();
+				cout << "\t\tIntroduzca el nombre del juego: ";		getline(cin, GameName);
+				cout << "\n\t\t";
+
+				SearchGame(GameLibrary, GameName); 
+
+				if ( == true) {				//todo --> falta variable para comprobar que el juego exista
+					cout << "\n\t\t" << system("pause");				
+					DeleteGame(GameLibrary, GameName);
+					system("cls");
+					
+					cin.ignore();
+					cout << "\n\t\tIntroduzca el nombre del juego: ";		getline(cin, GameName);
+					cout << "\t\tIntroduzca la fecha de lanzamiento (DD/MM/AAAA): "; getline(cin, ReleaseDate);
+					cout << "\t\tIntroduzca la valoracion 0/10: ";		cin >> Rating;
+					cin.ignore();
+					cout << "\t\tIntroduzca las plataformas: "; 		getline(cin, Platforms);
+					cout << "\t\tIntroduzca el genero: "; 				getline(cin, Genre);
+					cout << "\t\tIntroduzca el desarrollador: "; 		getline(cin, Developer);
+					addGame(GameLibrary, GameName, ReleaseDate, Rating, Platforms, Genre, Developer); //Añadir juego a la lista
+				}
 				cout << "\n\t\t" << system("pause");
 				break;
 
@@ -204,7 +224,7 @@ void ShowAllGames (Game *GameLibrary){
 	Position = GameLibrary;
 
 	while (Position != NULL) {
-		cout<< i << "._ " << Position -> GameName<<endl;
+		cout<< "\n\t\t" << i << "._ " << Position -> GameName<<endl;
 		Position = Position -> next;
 		i++;
 	}
