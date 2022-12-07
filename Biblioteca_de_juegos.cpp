@@ -25,6 +25,7 @@ void ShowAllGames (Game *);											 //Mostrar todos los juegos
 void ShowGame (Game *);							 					 //Mostrar un juego
 void SearchGame (Game *, string);									 //Buscar un juego
 void DeleteGame (Game *&, string);									 //Eliminar un juego
+void ModifyGame (Game *&, string);									 //Modificar un juego
 
 
 
@@ -75,31 +76,15 @@ int main() {
 				cout << "\n\t\t" << system("pause");
 				break;
 
-			case 3:		//todo --> MODIFY A GAME
+			case 3:		//* --> MODIFY A GAME
 				system("cls");
 				cout << "\n\t\t-----The Game Library-----\n\n" 	<< endl;
 				cin.ignore();
 				cout << "\t\tIntroduzca el nombre del juego: ";		getline(cin, GameName);
-				cout << "\n\t\t";
 
-				SearchGame(GameLibrary, GameName); 
-
-				if ( == true) {				//todo --> falta variable para comprobar que el juego exista
-					cout << "\n\t\t" << system("pause");				
-					DeleteGame(GameLibrary, GameName);
-					system("cls");
-					
-					cin.ignore();
-					cout << "\n\t\tIntroduzca el nombre del juego: ";		getline(cin, GameName);
-					cout << "\t\tIntroduzca la fecha de lanzamiento (DD/MM/AAAA): "; getline(cin, ReleaseDate);
-					cout << "\t\tIntroduzca la valoracion 0/10: ";		cin >> Rating;
-					cin.ignore();
-					cout << "\t\tIntroduzca las plataformas: "; 		getline(cin, Platforms);
-					cout << "\t\tIntroduzca el genero: "; 				getline(cin, Genre);
-					cout << "\t\tIntroduzca el desarrollador: "; 		getline(cin, Developer);
-					addGame(GameLibrary, GameName, ReleaseDate, Rating, Platforms, Genre, Developer); //Añadir juego a la lista
-				}
+				ModifyGame(GameLibrary, GameName);
 				cout << "\n\t\t" << system("pause");
+				
 				break;
 
 			case 4:		//* --> DELETE A GAME
@@ -189,6 +174,40 @@ void ShowGame (Game *Position){
 	cout << "\t\tPlataformas: " << Position -> Platforms << endl;
 	cout << "\t\tGenero: " << Position -> Genre << endl;
 	cout << "\t\tDesarrollador: " << Position -> Developer << endl;
+}
+
+//* 3	----> MODIFY GAME <----	 *//
+
+void ModifyGame (Game *& GameLibrary, string GameName) {
+	Game *Position = new Game();
+	Position = GameLibrary;
+	bool found = false;
+
+	while (Position != NULL) {
+		if (Position -> GameName == GameName){
+			found = true;
+			cout << "\t\tNombre del juego: " << Position -> GameName << endl;
+			cout << "\t\tFecha de lanzamiento: " << Position -> ReleaseDate << endl;
+			cout << "\t\tValoracion: " << Position -> Rating << endl;
+			cout << "\t\tPlataformas: " << Position -> Platforms << endl;
+			cout << "\t\tGenero: " << Position -> Genre << endl;
+			cout << "\t\tDesarrollador: " << Position -> Developer << endl;
+
+			cout << "\n\t\tIntroduzca el nuevo nombre del juego: ";		getline(cin, Position -> GameName);
+			cout << "\t\tIntroduzca la nueva fecha de lanzamiento: ";	getline(cin, Position -> ReleaseDate);
+			cout << "\t\tIntroduzca la nueva valoracion: ";			cin >> Position -> Rating;
+			cin.ignore();
+			cout << "\t\tIntroduzca las nuevas plataformas: ";			getline(cin, Position -> Platforms);
+			cout << "\t\tIntroduzca el nuevo genero: ";				getline(cin, Position -> Genre);
+			cout << "\t\tIntroduzca el nuevo desarrollador: ";			getline(cin, Position -> Developer);
+
+			cout << "\n\t\tEl juego se modifico correctamente." << endl;
+		} 
+		Position = Position -> next;
+	}
+	if (found == false ){
+		cout<< "\t\tEl Juego "<<GameName<<" no se encontro en la biblioteca. \n";
+	}
 }
 
 //* 4	----> DELETE GAME <----	 *//
